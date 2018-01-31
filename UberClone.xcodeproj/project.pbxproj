@@ -17,6 +17,11 @@
 		3A63EF0E1FE9517F001E5C89 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63EF0D1FE9517F001E5C89 /* ContainerVC.swift */; };
 		3A63EF111FE95A03001E5C89 /* CenterVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63EF101FE95A03001E5C89 /* CenterVCDelegate.swift */; };
 		3A65B2EA1FE6BC80001C7593 /* RoundedShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A65B2E91FE6BC80001C7593 /* RoundedShadowButton.swift */; };
+		3A7649661FF2B4B6007BB1FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7649651FF2B4B6007BB1FF /* GoogleService-Info.plist */; };
+		3A7649691FF2B6FC007BB1FF /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7649681FF2B6FC007BB1FF /* DataService.swift */; };
+		3A8511711FF0967B00C6F8D2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8511701FF0967B00C6F8D2 /* LoginVC.swift */; };
+		3A8511731FF09F2300C6F8D2 /* RoundedCornerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8511721FF09F2300C6F8D2 /* RoundedCornerTextField.swift */; };
+		3AAFDBBD1FEBFE27006F5755 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFDBBC1FEBFE27006F5755 /* UIViewExt.swift */; };
 		3AC0AEEE1FE6B0E700A1BE67 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0AEED1FE6B0E700A1BE67 /* GradientView.swift */; };
 		3AC0AEF01FE6B41D00A1BE67 /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0AEEF1FE6B41D00A1BE67 /* RoundImageView.swift */; };
 		3AC0AEF21FE6B5EB00A1BE67 /* RoundedShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0AEF11FE6B5EB00A1BE67 /* RoundedShadowView.swift */; };
@@ -35,6 +40,11 @@
 		3A63EF0D1FE9517F001E5C89 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		3A63EF101FE95A03001E5C89 /* CenterVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterVCDelegate.swift; sourceTree = "<group>"; };
 		3A65B2E91FE6BC80001C7593 /* RoundedShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowButton.swift; sourceTree = "<group>"; };
+		3A7649651FF2B4B6007BB1FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3A7649681FF2B6FC007BB1FF /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		3A8511701FF0967B00C6F8D2 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		3A8511721FF09F2300C6F8D2 /* RoundedCornerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerTextField.swift; sourceTree = "<group>"; };
+		3AAFDBBC1FEBFE27006F5755 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		3AC0AEED1FE6B0E700A1BE67 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3AC0AEEF1FE6B41D00A1BE67 /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		3AC0AEF11FE6B5EB00A1BE67 /* RoundedShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowView.swift; sourceTree = "<group>"; };
@@ -86,6 +96,9 @@
 		3A22FD761FE411A500FCEC77 /* UberClone */ = {
 			isa = PBXGroup;
 			children = (
+				3A7649671FF2B6DE007BB1FF /* Services */,
+				3A7649651FF2B4B6007BB1FF /* GoogleService-Info.plist */,
+				3AAFDBBB1FEBF7F7006F5755 /* Extension */,
 				3A63EF0F1FE959ED001E5C89 /* Protocols */,
 				3AC0AEEC1FE6B0B400A1BE67 /* Model */,
 				3AC0AEEB1FE6B0A800A1BE67 /* Controllers */,
@@ -107,6 +120,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		3A7649671FF2B6DE007BB1FF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3A7649681FF2B6FC007BB1FF /* DataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3AAFDBBB1FEBF7F7006F5755 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3AAFDBBC1FEBFE27006F5755 /* UIViewExt.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		3AC0AEEA1FE6B0A200A1BE67 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +144,7 @@
 				3AC0AEF11FE6B5EB00A1BE67 /* RoundedShadowView.swift */,
 				3AC0AEF31FE6B7CB00A1BE67 /* CircleView.swift */,
 				3A65B2E91FE6BC80001C7593 /* RoundedShadowButton.swift */,
+				3A8511721FF09F2300C6F8D2 /* RoundedCornerTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -125,6 +155,7 @@
 				3A22FD791FE411A500FCEC77 /* HomeVC.swift */,
 				3A63EF0B1FE94E9C001E5C89 /* LeftSidePanelVC.swift */,
 				3A63EF0D1FE9517F001E5C89 /* ContainerVC.swift */,
+				3A8511701FF0967B00C6F8D2 /* LoginVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -207,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A22FD821FE411A500FCEC77 /* LaunchScreen.storyboard in Resources */,
+				3A7649661FF2B4B6007BB1FF /* GoogleService-Info.plist in Resources */,
 				3A22FD7F1FE411A500FCEC77 /* Assets.xcassets in Resources */,
 				3A22FD7D1FE411A500FCEC77 /* Main.storyboard in Resources */,
 			);
@@ -278,13 +310,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A63EF111FE95A03001E5C89 /* CenterVCDelegate.swift in Sources */,
+				3A7649691FF2B6FC007BB1FF /* DataService.swift in Sources */,
 				3A65B2EA1FE6BC80001C7593 /* RoundedShadowButton.swift in Sources */,
+				3A8511711FF0967B00C6F8D2 /* LoginVC.swift in Sources */,
 				3A63EF0C1FE94E9C001E5C89 /* LeftSidePanelVC.swift in Sources */,
 				3AC0AEF41FE6B7CB00A1BE67 /* CircleView.swift in Sources */,
 				3A63EF0E1FE9517F001E5C89 /* ContainerVC.swift in Sources */,
+				3AAFDBBD1FEBFE27006F5755 /* UIViewExt.swift in Sources */,
 				3A22FD7A1FE411A500FCEC77 /* HomeVC.swift in Sources */,
 				3AC0AEF01FE6B41D00A1BE67 /* RoundImageView.swift in Sources */,
 				3AC0AEF21FE6B5EB00A1BE67 /* RoundedShadowView.swift in Sources */,
+				3A8511731FF09F2300C6F8D2 /* RoundedCornerTextField.swift in Sources */,
 				3A22FD781FE411A500FCEC77 /* AppDelegate.swift in Sources */,
 				3AC0AEEE1FE6B0E700A1BE67 /* GradientView.swift in Sources */,
 			);

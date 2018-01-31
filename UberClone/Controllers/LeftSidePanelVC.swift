@@ -16,4 +16,10 @@ class LeftSidePanelVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func SignUpLoginButton(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+        self.present(vc, animated: true, completion: nil)
+    }
 }
