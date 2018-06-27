@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-Bold</string>
-            <string>AvenirNext-Heavy</string>
-            <string>AvenirNext-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--HomeVC-->
         <scene sceneID="tne-QT-ifu">
@@ -87,6 +79,9 @@
                                     <constraint firstAttribute="height" constant="60" id="TC6-QI-rac"/>
                                 </constraints>
                                 <state key="normal" image="centerMapBtn"/>
+                                <connections>
+                                    <action selector="wasPresssCenterMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jsD-fE-PdL"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9v-oE-8IK">
                                 <rect key="frame" x="0.0" y="597" width="375" height="70"/>
@@ -290,6 +285,42 @@
                                     <action selector="SignUpLoginButton:" destination="xn2-Ox-mKc" eventType="touchUpInside" id="Ryq-x2-SQY"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hac-oU-7d7">
+                                <rect key="frame" x="20" y="412" width="158" height="172"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJl-cP-SWO">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="switchWasToggled:" destination="xn2-Ox-mKc" eventType="valueChanged" id="Xr5-Jk-fwr"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICKUP MODE ENABED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvT-Su-q4o">
+                                        <rect key="frame" x="0.0" y="41" width="158" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-photo" translatesAutoresizingMaskIntoConstraints="NO" id="TYc-2U-tEL" customClass="RoundImageView" customModule="UberClone" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="68" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Ksf-V9-JeA"/>
+                                            <constraint firstAttribute="height" constant="50" id="Yk3-zB-s0j"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01G-Fi-BGq">
+                                        <rect key="frame" x="0.0" y="128" width="113.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiB-Qd-TR0">
+                                        <rect key="frame" x="0.0" y="155" width="91" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -298,11 +329,21 @@
                             <constraint firstItem="dvd-4B-3Y4" firstAttribute="leading" secondItem="Muc-0B-JCQ" secondAttribute="leading" constant="20" id="RCt-q7-YRA"/>
                             <constraint firstItem="tU9-Pv-VsI" firstAttribute="leading" secondItem="Muc-0B-JCQ" secondAttribute="leading" constant="20" id="Tih-IP-SAa"/>
                             <constraint firstItem="4Q2-oZ-fD2" firstAttribute="leading" secondItem="Muc-0B-JCQ" secondAttribute="leading" id="bfi-D9-gP6"/>
+                            <constraint firstItem="dvd-4B-3Y4" firstAttribute="top" secondItem="hac-oU-7d7" secondAttribute="bottom" constant="20" id="eXp-8W-try"/>
                             <constraint firstItem="Muc-0B-JCQ" firstAttribute="bottom" secondItem="dvd-4B-3Y4" secondAttribute="bottom" constant="20" id="rDV-MG-Fky"/>
+                            <constraint firstItem="hac-oU-7d7" firstAttribute="leading" secondItem="Muc-0B-JCQ" secondAttribute="leading" constant="20" id="rqn-lK-10z"/>
                             <constraint firstItem="tU9-Pv-VsI" firstAttribute="top" secondItem="4Q2-oZ-fD2" secondAttribute="bottom" constant="20" id="uhP-aP-TMk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Muc-0B-JCQ"/>
                     </view>
+                    <connections>
+                        <outlet property="accountTypeLabel" destination="KiB-Qd-TR0" id="eg9-OA-UcG"/>
+                        <outlet property="loginLogoutButton" destination="dvd-4B-3Y4" id="lwS-QH-cP0"/>
+                        <outlet property="pickupModeSwitch" destination="hJl-cP-SWO" id="alD-C5-BA4"/>
+                        <outlet property="pickupModelLabel" destination="dvT-Su-q4o" id="MmY-Sc-whf"/>
+                        <outlet property="userEmailLabel" destination="01G-Fi-BGq" id="6Zz-A4-T8M"/>
+                        <outlet property="userImageView" destination="TYc-2U-tEL" id="8Bg-fa-E67"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AV7-Vq-dkR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -361,7 +402,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up or login to requesting rides with HTCKHKR the easiest way to get lift anywhere" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7b9-bd-UgR">
-                                                            <rect key="frame" x="0.0" y="50" width="319" height="84"/>
+                                                            <rect key="frame" x="6.5" y="50" width="306.5" height="84"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="84" id="Sf3-rz-Qvk"/>
                                                             </constraints>

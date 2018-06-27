@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0763896E20E33B7B001DC1D8 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763896D20E33B7B001DC1D8 /* UIStoryboard.swift */; };
+		0763897020E376B5001DC1D8 /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763896F20E376B5001DC1D8 /* UpdateService.swift */; };
+		0763897220E38826001DC1D8 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763897120E38826001DC1D8 /* DriverAnnotation.swift */; };
 		2A7718E97FDD106F862C1411 /* Pods_UberClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B573F9672D35FDA6D4370B0F /* Pods_UberClone.framework */; };
 		3A22FD781FE411A500FCEC77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A22FD771FE411A500FCEC77 /* AppDelegate.swift */; };
 		3A22FD7A1FE411A500FCEC77 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A22FD791FE411A500FCEC77 /* HomeVC.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0763896D20E33B7B001DC1D8 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
+		0763896F20E376B5001DC1D8 /* UpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
+		0763897120E38826001DC1D8 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		3A22FD741FE411A500FCEC77 /* UberClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A22FD771FE411A500FCEC77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A22FD791FE411A500FCEC77 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -100,7 +106,6 @@
 				3A7649651FF2B4B6007BB1FF /* GoogleService-Info.plist */,
 				3AAFDBBB1FEBF7F7006F5755 /* Extension */,
 				3A63EF0F1FE959ED001E5C89 /* Protocols */,
-				3AC0AEEC1FE6B0B400A1BE67 /* Model */,
 				3AC0AEEB1FE6B0A800A1BE67 /* Controllers */,
 				3AC0AEEA1FE6B0A200A1BE67 /* View */,
 				3A22FD771FE411A500FCEC77 /* AppDelegate.swift */,
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				3A7649681FF2B6FC007BB1FF /* DataService.swift */,
+				0763896F20E376B5001DC1D8 /* UpdateService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -132,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				3AAFDBBC1FEBFE27006F5755 /* UIViewExt.swift */,
+				0763896D20E33B7B001DC1D8 /* UIStoryboard.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -145,6 +152,7 @@
 				3AC0AEF31FE6B7CB00A1BE67 /* CircleView.swift */,
 				3A65B2E91FE6BC80001C7593 /* RoundedShadowButton.swift */,
 				3A8511721FF09F2300C6F8D2 /* RoundedCornerTextField.swift */,
+				0763897120E38826001DC1D8 /* DriverAnnotation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,13 +166,6 @@
 				3A8511701FF0967B00C6F8D2 /* LoginVC.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		3AC0AEEC1FE6B0B400A1BE67 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		72214BFD5EA983E7EBED28A5 /* Frameworks */ = {
@@ -311,10 +312,13 @@
 			files = (
 				3A63EF111FE95A03001E5C89 /* CenterVCDelegate.swift in Sources */,
 				3A7649691FF2B6FC007BB1FF /* DataService.swift in Sources */,
+				0763897020E376B5001DC1D8 /* UpdateService.swift in Sources */,
+				0763897220E38826001DC1D8 /* DriverAnnotation.swift in Sources */,
 				3A65B2EA1FE6BC80001C7593 /* RoundedShadowButton.swift in Sources */,
 				3A8511711FF0967B00C6F8D2 /* LoginVC.swift in Sources */,
 				3A63EF0C1FE94E9C001E5C89 /* LeftSidePanelVC.swift in Sources */,
 				3AC0AEF41FE6B7CB00A1BE67 /* CircleView.swift in Sources */,
+				0763896E20E33B7B001DC1D8 /* UIStoryboard.swift in Sources */,
 				3A63EF0E1FE9517F001E5C89 /* ContainerVC.swift in Sources */,
 				3AAFDBBD1FEBFE27006F5755 /* UIViewExt.swift in Sources */,
 				3A22FD7A1FE411A500FCEC77 /* HomeVC.swift in Sources */,
@@ -461,10 +465,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZB58A75PGM;
+				DEVELOPMENT_TEAM = Z495DZRPVP;
 				INFOPLIST_FILE = UberClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chanthem.UberClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seyha.uberclone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,10 +481,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZB58A75PGM;
+				DEVELOPMENT_TEAM = Z495DZRPVP;
 				INFOPLIST_FILE = UberClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chanthem.UberClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seyha.uberclone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

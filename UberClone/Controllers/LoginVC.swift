@@ -40,6 +40,7 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func authBtnWasPressed(_ sender: Any) {
+      
         if emailTextField.text != nil && passwordTextField.text != nil {
             authButton.animateButton(shouldLoad: true, withMessage: nil)
             self.view.endEditing(true)

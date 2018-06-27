@@ -7,19 +7,129 @@
 //
 
 import UIKit
+import Firebase
+
+enum AccountType : String {
+   case driver = "DRIVER"
+   case passenger = "PASSENGER"
+}
 
 class LeftSidePanelVC: UIViewController {
+   
+   @IBOutlet weak var userEmailLabel: UILabel!
+   @IBOutlet weak var accountTypeLabel: UILabel!
+   @IBOutlet weak var userImageView: RoundImageView!
+   @IBOutlet weak var pickupModeSwitch: UISwitch!
+   @IBOutlet weak var pickupModelLabel: UILabel!
+   
+   @IBOutlet weak var loginLogoutButton: UIButton!
+   
+   var currentUserId: String? {
+      return  FIRAuth.auth()?.currentUser?.uid
+   }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
 
-        // Do any additional setup after loading the view.
     }
+   
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      
+      pickupModeSwitch.isOn = false
+      pickupModeSwitch.isHidden = true
+      pickupModelLabel.isHidden = true
+      
+      
+      if let currentUser = FIRAuth.auth()?.currentUser {
+         
+         userEmailLabel.text = currentUser.email
+         accountTypeLabel.text = ""
+         userImageView.isHidden = false
+         loginLogoutButton.setTitle("Logout" , for: .normal)
+         pickupModeSwitch.isHidden = false
+         pickupModelLabel.isHidden = false
+        
+         
+         
+      } else {
+         
+         userEmailLabel.text =  ""
+         accountTypeLabel.text = ""
+         userImageView.isHidden = true
+         loginLogoutButton.setTitle("Sign Up / Login" , for: .normal)
+         pickupModeSwitch.isHidden = true
+         pickupModelLabel.isHidden = true
+         
+      }
+      
+      observePassengerAndDriver()
+   }
+   
+   
+   
+   func observePassengerAndDriver() {
+
+      DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: { (snapshot) in
+         if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            for snap in snapshot {
+               if snap.key == FIRAuth.auth()?.currentUser?.uid {
+                  self.accountTypeLabel.text =  AccountType.passenger.rawValue
+                  self.pickupModeSwitch.isHidden = true
+               }
+            }
+         }
+      })
+      
+      DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value) { (snapshot) in
+         if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            for snap in snapshot {
+               if snap.key == FIRAuth.auth()?.currentUser?.uid {
+                  self.accountTypeLabel.text = AccountType.driver.rawValue
+                  self.pickupModeSwitch.isHidden = false
+                  let switchStatus = snap.childSnapshot(forPath: "isPickupModeEnable").value as! Bool
+                  self.pickupModeSwitch.isOn = switchStatus
+                  self.pickupModelLabel.isHidden = false
+               }
+            }
+         }
+      }
+   }
+   
+   @IBAction func switchWasToggled(_ sender: Any) {
+
+      if pickupModeSwitch.isOn {
+         pickupModelLabel.text = "PICKUP MODE ENABLED"
+         DataService.instance.REF_DRIVERS.child(currentUserId!).updateChildValues(["isPickupModeEnable": true])
+      } else {
+         pickupModelLabel.text = "PICKUP MODE DISABLED"
+         DataService.instance.REF_DRIVERS.child(currentUserId!).updateChildValues(["isPickupModeEnable": false])
+      }
+      
+      AppDelegate.getAppDelegate().menuContainerVC.toggleLeftPanel()
+      
+   }
+   
 
     @IBAction func SignUpLoginButton(_ sender: Any) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-        self.present(vc, animated: true, completion: nil)
+      
+      if FIRAuth.auth()?.currentUser == nil {
+         let vc = storyboard?.mainStoryboard(withIdentifier: "LoginVC") as! LoginVC
+         self.present(vc, animated: true, completion: nil)
+      } else {
+         do {
+            try FIRAuth.auth()?.signOut()
+            userEmailLabel.text = ""
+            accountTypeLabel.text = ""
+            userImageView.isHidden = true
+            pickupModelLabel.text = ""
+            pickupModeSwitch.isHidden = true
+            loginLogoutButton.setTitle("Sign Up / Login", for: .normal)
+         } catch (let error) {
+            print(error.localizedDescription)
+         }
+      }
     }
 }
