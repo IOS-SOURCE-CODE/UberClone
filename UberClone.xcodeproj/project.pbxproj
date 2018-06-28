@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073EB6F020E4905100A5E42A /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073EB6EF20E4905100A5E42A /* AccountType.swift */; };
+		073EB6F220E4908500A5E42A /* Snapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073EB6F120E4908500A5E42A /* Snapshots.swift */; };
 		0763896E20E33B7B001DC1D8 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763896D20E33B7B001DC1D8 /* UIStoryboard.swift */; };
 		0763897020E376B5001DC1D8 /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763896F20E376B5001DC1D8 /* UpdateService.swift */; };
 		0763897220E38826001DC1D8 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763897120E38826001DC1D8 /* DriverAnnotation.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		073EB6EF20E4905100A5E42A /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
+		073EB6F120E4908500A5E42A /* Snapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshots.swift; sourceTree = "<group>"; };
 		0763896D20E33B7B001DC1D8 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		0763896F20E376B5001DC1D8 /* UpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		0763897120E38826001DC1D8 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
@@ -72,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		073EB6EE20E4903900A5E42A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				073EB6EF20E4905100A5E42A /* AccountType.swift */,
+				073EB6F120E4908500A5E42A /* Snapshots.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		3157DD2C5C138F51F9EF8707 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +115,7 @@
 		3A22FD761FE411A500FCEC77 /* UberClone */ = {
 			isa = PBXGroup;
 			children = (
+				073EB6EE20E4903900A5E42A /* Constants */,
 				3A7649671FF2B6DE007BB1FF /* Services */,
 				3A7649651FF2B4B6007BB1FF /* GoogleService-Info.plist */,
 				3AAFDBBB1FEBF7F7006F5755 /* Extension */,
@@ -314,9 +328,11 @@
 				3A7649691FF2B6FC007BB1FF /* DataService.swift in Sources */,
 				0763897020E376B5001DC1D8 /* UpdateService.swift in Sources */,
 				0763897220E38826001DC1D8 /* DriverAnnotation.swift in Sources */,
+				073EB6F220E4908500A5E42A /* Snapshots.swift in Sources */,
 				3A65B2EA1FE6BC80001C7593 /* RoundedShadowButton.swift in Sources */,
 				3A8511711FF0967B00C6F8D2 /* LoginVC.swift in Sources */,
 				3A63EF0C1FE94E9C001E5C89 /* LeftSidePanelVC.swift in Sources */,
+				073EB6F020E4905100A5E42A /* AccountType.swift in Sources */,
 				3AC0AEF41FE6B7CB00A1BE67 /* CircleView.swift in Sources */,
 				0763896E20E33B7B001DC1D8 /* UIStoryboard.swift in Sources */,
 				3A63EF0E1FE9517F001E5C89 /* ContainerVC.swift in Sources */,

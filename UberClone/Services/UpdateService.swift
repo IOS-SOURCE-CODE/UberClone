@@ -18,7 +18,7 @@ class UpdateService {
          if let userSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
             for user in userSnapshot {
                if user.key == FIRAuth.auth()?.currentUser?.uid {
-                  DataService.instance.REF_USERS.child(user.key).updateChildValues(["coordinate": [coordinate.latitude, coordinate.longitude]])
+                  DataService.instance.REF_USERS.child(user.key).updateChildValues([UserSnapshot.coordinate.rawValue: [coordinate.latitude, coordinate.longitude]])
                }
             }
          }
@@ -31,8 +31,8 @@ class UpdateService {
          if let driverSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
             for driver in driverSnapshot {
                if driver.key == FIRAuth.auth()?.currentUser?.uid {
-                  if driver.childSnapshot(forPath: "isPickupModeEnable").value as? Bool == true {
-                     DataService.instance.REF_DRIVERS.child(driver.key).updateChildValues(["coordinate": [coordinate.latitude, coordinate.longitude]])
+                  if driver.childSnapshot(forPath: DriverSnapshot.isPickupModeEnable.rawValue).value as? Bool == true {
+                     DataService.instance.REF_DRIVERS.child(driver.key).updateChildValues([DriverSnapshot.coordinate.rawValue: [coordinate.latitude, coordinate.longitude]])
                   }
                }
             }

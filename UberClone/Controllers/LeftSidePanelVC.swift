@@ -9,10 +9,7 @@
 import UIKit
 import Firebase
 
-enum AccountType : String {
-   case driver = "DRIVER"
-   case passenger = "PASSENGER"
-}
+
 
 class LeftSidePanelVC: UIViewController {
    
@@ -23,6 +20,9 @@ class LeftSidePanelVC: UIViewController {
    @IBOutlet weak var pickupModelLabel: UILabel!
    
    @IBOutlet weak var loginLogoutButton: UIButton!
+   
+   
+   
    
    var currentUserId: String? {
       return  FIRAuth.auth()?.currentUser?.uid
@@ -52,8 +52,6 @@ class LeftSidePanelVC: UIViewController {
          pickupModeSwitch.isHidden = false
          pickupModelLabel.isHidden = false
         
-         
-         
       } else {
          
          userEmailLabel.text =  ""
@@ -76,7 +74,7 @@ class LeftSidePanelVC: UIViewController {
          if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
             for snap in snapshot {
                if snap.key == FIRAuth.auth()?.currentUser?.uid {
-                  self.accountTypeLabel.text =  AccountType.passenger.rawValue
+                  self.accountTypeLabel.text =  AccountType.passenger.value
                   self.pickupModeSwitch.isHidden = true
                }
             }
@@ -87,9 +85,9 @@ class LeftSidePanelVC: UIViewController {
          if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
             for snap in snapshot {
                if snap.key == FIRAuth.auth()?.currentUser?.uid {
-                  self.accountTypeLabel.text = AccountType.driver.rawValue
+                  self.accountTypeLabel.text = AccountType.driver.value
                   self.pickupModeSwitch.isHidden = false
-                  let switchStatus = snap.childSnapshot(forPath: "isPickupModeEnable").value as! Bool
+                  let switchStatus = snap.childSnapshot(forPath: DriverSnapshot.isPickupModeEnable.rawValue).value as! Bool
                   self.pickupModeSwitch.isOn = switchStatus
                   self.pickupModelLabel.isHidden = false
                }
@@ -102,10 +100,10 @@ class LeftSidePanelVC: UIViewController {
 
       if pickupModeSwitch.isOn {
          pickupModelLabel.text = "PICKUP MODE ENABLED"
-         DataService.instance.REF_DRIVERS.child(currentUserId!).updateChildValues(["isPickupModeEnable": true])
+         DataService.instance.REF_DRIVERS.child(currentUserId!).updateChildValues([DriverSnapshot.isPickupModeEnable.rawValue: true])
       } else {
          pickupModelLabel.text = "PICKUP MODE DISABLED"
-         DataService.instance.REF_DRIVERS.child(currentUserId!).updateChildValues(["isPickupModeEnable": false])
+      DataService.instance.REF_DRIVERS.child(currentUserId!).updateChildValues([DriverSnapshot.isPickupModeEnable.rawValue: false])
       }
       
       AppDelegate.getAppDelegate().menuContainerVC.toggleLeftPanel()

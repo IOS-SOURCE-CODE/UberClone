@@ -16,12 +16,21 @@ class HomeVC: UIViewController {
    
    @IBOutlet weak var actionButton: RoundedShadowButton!
    @IBOutlet weak var mapView: MKMapView!
+   @IBOutlet weak var centerMapButton: UIButton!
+   @IBOutlet weak var searchLocationTextField: UITextField!
+   
+   @IBOutlet weak var searchLocationCircleView: CircleView!
+   
    
    var delegate: CenterVCDelegate?
    var manager: CLLocationManager?
    var regionRadius: CLLocationDistance = 1000
    
+   var tableView = UITableView()
+   
    let revealSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width:80, height:80), backgroundColor: UIColor.white)
+   
+   
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -34,7 +43,15 @@ class HomeVC: UIViewController {
       
       mapView.delegate = self
       
+      
+      searchLocationTextField.delegate = self
+      
       centerMapOnUserLocation()
+      
+      DataService.instance.REF_DRIVERS.observe(.value) { (snapshot) in
+         self.loadDriverAnnotationsFromFB()
+      }
+      
       
       self.view.addSubview(revealSplashView)
       revealSplashView.animationType = .heartBeat
@@ -53,16 +70,46 @@ class HomeVC: UIViewController {
    
    @IBAction func wasPresssCenterMap(_ sender: Any) {
       centerMapOnUserLocation()
+      centerMapButton.fadeTo(alpha: 0.0, duration: 0.2)
    }
    
    fileprivate func loadDriverAnnotationsFromFB() {
       DataService.instance.REF_DRIVERS.observe(.value) { (snapshot) in
          if let driverSnapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
             for driver in driverSnapshot {
-               if driver.hasChild("coordinate") {
-                  if driver.childSnapshot(forPath: "isPickupModeEnabled").value as? Bool == true {
-                     if let driverDict = driver.value as? [String: Any] {
-                        let coordinateArray = driverDict["coordinate"] as! NSArray
+               if driver.hasChild(DriverSnapshot.userIsDriver.rawValue) {
+                  if driver.hasChild(DriverSnapshot.coordinate.rawValue) {
+                     if driver.childSnapshot(forPath: DriverSnapshot.isPickupModeEnable.rawValue).value as? Bool == true {
+                        if let driverDict = driver.value as? [String: Any] {
+                           let coordinateArray = driverDict[DriverSnapshot.coordinate.rawValue] as! NSArray
+                           let driverCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
+                           let annotation = DriverAnnotation(coordinate: driverCoordinate, withKey: driver.key)
+                           var driverIsVisible: Bool {
+                              return  self.mapView.annotations.contains(where: { (annotation) -> Bool in
+                                 if let driverAnnotation = annotation as? DriverAnnotation {
+                                    if driverAnnotation.key == driver.key {
+                                       driverAnnotation.update(annotationPosition: driverAnnotation, withCoordinate: driverCoordinate)
+                                       return true
+                                    }
+                                 }
+                                 return false
+                              })
+                           }
+                           
+                           if !driverIsVisible {
+                              self.mapView.addAnnotation(annotation)
+                           }
+                        }
+                     } else {
+                        for annotation in self.mapView.annotations {
+                           if annotation.isKind(of: DriverAnnotation.self) {
+                              if let annotation = annotation as? DriverAnnotation {
+                                 if annotation.key == driver.key {
+                                    self.mapView.removeAnnotation(annotation)
+                                 }
+                              }
+                           }
+                        }
                      }
                   }
                }
@@ -84,6 +131,7 @@ extension HomeVC : CLLocationManagerDelegate{
       } else {
          manager?.requestAlwaysAuthorization()
       }
+      
    }
    
    fileprivate func centerMapOnUserLocation() {
@@ -120,5 +168,105 @@ extension HomeVC: MKMapViewDelegate {
       
       return nil
    }
+   
+   func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+      centerMapButton.fadeTo(alpha: 1.0, duration: 0.2)
+   }
 }
 
+
+
+extension HomeVC: UITextFieldDelegate {
+   
+   fileprivate func animateTableView(shouldShow: Bool) {
+      
+      let spaceVertical: CGFloat = 200
+      
+      if shouldShow {
+         
+         UIView.animate(withDuration: 0.2) {
+            self.tableView.frame = CGRect(x: 20, y: spaceVertical, width: self.view.frame.width - 40, height: self.view.frame.height - (spaceVertical + 50) )
+         }
+      } else {
+         UIView.animate(withDuration: 0.2, animations: {
+            self.tableView.frame = CGRect(x: 20, y: self.view.frame.height, width: self.view.frame.width - 40, height: self.view.frame.height - (spaceVertical + 50) )
+         }, completion: { _ in
+            for subview in self.view.subviews {
+               if subview.tag == 20 {
+                  subview.removeFromSuperview()
+               }
+            }
+         })
+      }
+   }
+   
+   fileprivate func animationSearchCircleView() {
+      UIView.animate(withDuration: 0.2) {
+         self.searchLocationCircleView.backgroundColor = .red
+         self.searchLocationCircleView.borderColor = UIColor.init(red: 199/255, green: 0, blue: 0, alpha: 1.0)
+      }
+   }
+   
+   fileprivate func setupTableView() {
+      tableView.frame = CGRect(x: 20, y: view.frame.height, width: view.frame.width - 40, height: view.frame.height - 170)
+      tableView.layer.cornerRadius = 5.0
+      tableView.register(UITableViewCell.self, forCellReuseIdentifier: "locationCell")
+      
+      tableView.delegate = self
+      tableView.dataSource = self
+      tableView.rowHeight = 60
+      tableView.tag = 20
+      
+      view.addSubview(tableView)
+   }
+   
+   func textFieldDidBeginEditing(_ textField: UITextField) {
+      
+      if textField == searchLocationTextField {
+         setupTableView()
+         animateTableView(shouldShow: true)
+         animationSearchCircleView()
+      }
+
+   }
+   
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      
+      if textField == searchLocationTextField {
+         view.endEditing(true)
+      }
+      
+      return true
+   }
+   
+   func textFieldDidEndEditing(_ textField: UITextField) {
+      if textField == searchLocationTextField {
+         if searchLocationTextField.text == "" {
+            UIView.animate(withDuration: 0.2) {
+               self.searchLocationCircleView.backgroundColor = .lightGray
+               self.searchLocationCircleView.borderColor = .darkGray
+            }
+         }
+      }
+   }
+   
+   func textFieldShouldClear(_ textField: UITextField) -> Bool {
+      centerMapOnUserLocation()
+      return true
+   }
+}
+
+extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return 10
+   }
+   
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
+      return cell
+   }
+   
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      animateTableView(shouldShow: false)
+   }
+}

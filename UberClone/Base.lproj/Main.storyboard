@@ -161,8 +161,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="where are you going?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="07X-mr-I2p">
-                                                <rect key="frame" x="25" y="4" width="280" height="17"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="where are you going?" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="07X-mr-I2p">
+                                                <rect key="frame" x="25" y="3" width="280" height="19"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -203,7 +203,10 @@
                     </view>
                     <connections>
                         <outlet property="actionButton" destination="MZ9-EL-8fP" id="oei-kP-cdP"/>
+                        <outlet property="centerMapButton" destination="yf0-U5-PoC" id="eFB-gd-StC"/>
                         <outlet property="mapView" destination="plb-9E-TgV" id="IYE-Ju-Kd7"/>
+                        <outlet property="searchLocationCircleView" destination="goF-UA-8ww" id="HlA-C7-ufk"/>
+                        <outlet property="searchLocationTextField" destination="07X-mr-I2p" id="fRm-Ay-gU5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
