@@ -28,6 +28,8 @@ class HomeVC: UIViewController {
    
    var tableView = UITableView()
    
+   var matchingItems: [MKMapItem] = [MKMapItem]()
+   
    let revealSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width:80, height:80), backgroundColor: UIColor.white)
    
    
@@ -150,7 +152,7 @@ extension HomeVC : CLLocationManagerDelegate{
    }
 }
 
-
+// MARK: - Map MKMapViewDelegate
 extension HomeVC: MKMapViewDelegate {
    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {  
       UpdateService.instance.updateDriverLocation(with: userLocation.coordinate)
@@ -171,6 +173,25 @@ extension HomeVC: MKMapViewDelegate {
    
    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
       centerMapButton.fadeTo(alpha: 1.0, duration: 0.2)
+   }
+   
+   fileprivate func performSearch() {
+      matchingItems.removeAll()
+      let request = MKLocalSearchRequest()
+      request.naturalLanguageQuery = searchLocationTextField.text
+      request.region = self.mapView.region
+      let search = MKLocalSearch(request: request)
+      search.start { (response, error) in
+         if error != nil {
+            print(error.debugDescription)
+         } else if response?.mapItems.count == 0 {
+            print("No results")
+         } else {
+            _ = response?.mapItems.compactMap { self.matchingItems.append($0) }
+            self.tableView.reloadData()
+         }
+      }
+      
    }
 }
 
@@ -233,6 +254,7 @@ extension HomeVC: UITextFieldDelegate {
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
       
       if textField == searchLocationTextField {
+         performSearch()
          view.endEditing(true)
       }
       
@@ -251,6 +273,8 @@ extension HomeVC: UITextFieldDelegate {
    }
    
    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+      matchingItems = []
+      tableView.reloadData()
       centerMapOnUserLocation()
       return true
    }
@@ -258,15 +282,20 @@ extension HomeVC: UITextFieldDelegate {
 
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return 10
+      return matchingItems.count
    }
    
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
+      let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "locationCell")
+      let matchingItem =  matchingItems[indexPath.row]
+      cell.textLabel?.text = matchingItem.name
+      cell.detailTextLabel?.text = matchingItem.placemark.title
       return cell
    }
    
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       animateTableView(shouldShow: false)
+      tableView.deselectRow(at: indexPath, animated: true)
+      view.endEditing(true)
    }
 }

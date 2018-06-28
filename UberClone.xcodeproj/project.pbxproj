@@ -202,7 +202,6 @@
 				3A22FD711FE411A500FCEC77 /* Frameworks */,
 				3A22FD721FE411A500FCEC77 /* Resources */,
 				5BA40A73F9D32FCFD094838B /* [CP] Embed Pods Frameworks */,
-				6222C0D7AD55A32500880BF6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -300,21 +299,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UberClone/Pods-UberClone-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6222C0D7AD55A32500880BF6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UberClone/Pods-UberClone-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
