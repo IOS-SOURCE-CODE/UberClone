@@ -234,6 +234,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Mr-Q4-DJX" secondAttribute="trailing" constant="20" symbolic="YES" id="Cvq-hb-qF6"/>
                                     <constraint firstAttribute="height" constant="90" id="bTo-Jk-lfi"/>
                                     <constraint firstItem="7Mr-Q4-DJX" firstAttribute="leading" secondItem="4Q2-oZ-fD2" secondAttribute="leadingMargin" constant="20" id="nbh-H5-BbW"/>
                                     <constraint firstItem="7Mr-Q4-DJX" firstAttribute="centerY" secondItem="4Q2-oZ-fD2" secondAttribute="centerY" id="pFQ-RI-63Q"/>
@@ -330,6 +331,7 @@
                             <constraint firstItem="Muc-0B-JCQ" firstAttribute="trailing" secondItem="4Q2-oZ-fD2" secondAttribute="trailing" id="2ni-d8-7rn"/>
                             <constraint firstItem="4Q2-oZ-fD2" firstAttribute="top" secondItem="QbL-TX-FPF" secondAttribute="top" id="CTd-Ve-qp0"/>
                             <constraint firstItem="dvd-4B-3Y4" firstAttribute="leading" secondItem="Muc-0B-JCQ" secondAttribute="leading" constant="20" id="RCt-q7-YRA"/>
+                            <constraint firstItem="Muc-0B-JCQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dvd-4B-3Y4" secondAttribute="trailing" symbolic="YES" id="T4h-Ts-nqS"/>
                             <constraint firstItem="tU9-Pv-VsI" firstAttribute="leading" secondItem="Muc-0B-JCQ" secondAttribute="leading" constant="20" id="Tih-IP-SAa"/>
                             <constraint firstItem="4Q2-oZ-fD2" firstAttribute="leading" secondItem="Muc-0B-JCQ" secondAttribute="leading" id="bfi-D9-gP6"/>
                             <constraint firstItem="dvd-4B-3Y4" firstAttribute="top" secondItem="hac-oU-7d7" secondAttribute="bottom" constant="20" id="eXp-8W-try"/>

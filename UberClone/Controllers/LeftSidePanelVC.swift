@@ -51,6 +51,7 @@ class LeftSidePanelVC: UIViewController {
          loginLogoutButton.setTitle("Logout" , for: .normal)
          pickupModeSwitch.isHidden = false
          pickupModelLabel.isHidden = false
+         
         
       } else {
          
@@ -90,6 +91,7 @@ class LeftSidePanelVC: UIViewController {
                   let switchStatus = snap.childSnapshot(forPath: DriverSnapshot.isPickupModeEnable.rawValue).value as! Bool
                   self.pickupModeSwitch.isOn = switchStatus
                   self.pickupModelLabel.isHidden = false
+                  
                }
             }
          }

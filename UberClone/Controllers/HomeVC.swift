@@ -32,7 +32,11 @@ class HomeVC: UIViewController {
    
    let revealSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width:80, height:80), backgroundColor: UIColor.white)
    
+   var currentUserId: String? {
+      return FIRAuth.auth()?.currentUser?.uid
+   }
    
+   var selectedItemPlacemark: MKPlacemark?
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -166,7 +170,25 @@ extension HomeVC: MKMapViewDelegate {
          view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
          view.image = UIImage(named: "driverAnnotation")
          return view
+      } else if let annotation = annotation as? PassengerAnnotation {
+         let identifer = "passsenger"
+         var view: MKAnnotationView
+         view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifer)
+         view.image = UIImage(named: "currentLocationAnnotation")
+         return view
+      } else if let annotation = annotation as? MKPointAnnotation {
+         let identifier = "destination"
+         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+         if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+         } else {
+            annotationView?.annotation = annotation
+         }
+         annotationView?.image = UIImage(named: "destinationAnnotation")
+         return annotationView
       }
+      
+      
       
       return nil
    }
@@ -191,12 +213,25 @@ extension HomeVC: MKMapViewDelegate {
             self.tableView.reloadData()
          }
       }
+   }
+   
+   func dropPinFor(placemark: MKPlacemark) {
+      selectedItemPlacemark  = placemark
       
+      for annotation in mapView.annotations {
+         if annotation.isKind(of: MKPointAnnotation.self) {
+            mapView.removeAnnotation(annotation)
+         }
+      }
+      
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = placemark.coordinate
+      mapView.addAnnotation(annotation)
    }
 }
 
 
-
+// MARK: - UITextFieldDelegate
 extension HomeVC: UITextFieldDelegate {
    
    fileprivate func animateTableView(shouldShow: Bool) {
@@ -275,11 +310,14 @@ extension HomeVC: UITextFieldDelegate {
    func textFieldShouldClear(_ textField: UITextField) -> Bool {
       matchingItems = []
       tableView.reloadData()
+//      animateTableView(shouldShow: false)
       centerMapOnUserLocation()
       return true
    }
 }
 
+
+// MARK: - Table view Delegate and Data Source
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return matchingItems.count
@@ -294,8 +332,37 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
    }
    
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+      let passengerCoordinate = manager?.location?.coordinate
+      
+      let passengerAnnotation = PassengerAnnotation(coordinate: passengerCoordinate!, key: currentUserId!)
+      mapView.addAnnotation(passengerAnnotation)
+      searchLocationTextField.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
+      let selectedMatchingItem = matchingItems[indexPath.row]
+      DataService.instance.REF_USERS.child(currentUserId!).updateChildValues(["tripCoordinate": [selectedMatchingItem.placemark.coordinate.longitude, selectedMatchingItem.placemark.coordinate.latitude]])
+      
+      dropPinFor(placemark: selectedMatchingItem.placemark)
+      
       animateTableView(shouldShow: false)
       tableView.deselectRow(at: indexPath, animated: true)
       view.endEditing(true)
+      
+      
+   }
+}
+
+
+
+// MARK: - Scroll View
+extension HomeVC {
+   
+   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+      view.endEditing(true)
+   }
+   
+   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+      if searchLocationTextField.text == "" {
+         animateTableView(shouldShow: false)
+      }
    }
 }
